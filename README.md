@@ -7,4 +7,7 @@ What we need isn't another form of social media. We need a simple website which 
 Instead of relying on socail media to connect to our friends and family, **QuickConnect** can help us to stengthen our precious relationships.
 
 ## Design
-![Screenshot of Day-of-Week buttons] (assets/images/Day-of-WeekButtons.png)
+![Day-of-WeekButtons](https://github.com/jared-parrish321/startup/assets/74101493/5640b5c1-2a1a-48df-9e4c-1af388d18313)
+![MondaySchedule](https://github.com/jared-parrish321/startup/assets/74101493/95d48a3f-26f1-4b5d-a4ae-148487928eb1)
+![QuickConnectBackend](https://github.com/jared-parrish321/startup/assets/74101493/f9ea2392-6c81-4ce4-bd01-dcf4a03a64bd)
+
