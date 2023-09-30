@@ -7,4 +7,4 @@ What we need isn't another form of social media. We need a simple website which 
 Instead of relying on socail media to connect to our friends and family, **QuickConnect** can help us to stengthen our precious relationships.
 
 ## Design
-![Screenshot of Day-of-Week buttons] (/assets/images/Day-of-Week\ Buttons.png)
+![Screenshot of Day-of-Week buttons] (assets/images/Day-of-WeekButtons.png)
