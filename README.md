@@ -48,4 +48,15 @@ Here is a rough blueprint of how users would interact with the server
 - Images - I currently do not need images so I haven't added any
 - Login - Input box and submit button for login
 - Database - The activities represent data pulled from the database
-- WebSocket - The activites represent real-time input
+- WebSocket - The activities represent real-time input
+
+## CSS Deliverable
+- Header, footer, and main content body
+- Navigation Elements - made responsive and pretty
+- Application Images - Added and styled a photo
+- Consolidated 9 pages to 2
+- Responsive to window resizing 
+- Application elements - Good white space and contrast
+- Application text content - Consistent fonts
+
+  
