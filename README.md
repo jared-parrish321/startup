@@ -39,4 +39,13 @@ Here is a rough blueprint of how users would interact with the server
     4. Update your own Calendar
 - **CSS:** Consistent styling that makes navigating and seeing the application easier
 - **JavaScript:** Implements login authentication, updating group calendar, updating personal calendar, navigating applications, backend
-- **Database:** Stores group calendar 
+- **Database:** Stores group calendar
+
+## HTMl Deliverable
+- HTML pages - 9 HTML pages representing the 7 days, login, and the Days of Week view
+- Links - The login page links to the the Days of Week page. The Days of Week page has buttons that link to the 7 day-pages
+- Text - All of the text has been filled out including example activities on the day-pages
+- Images - I currently do not need images so I haven't added any
+- Login - Input box and submit button for login
+- Database - The activities represent data pulled from the database
+- WebSocket - The activites represent real-time input
