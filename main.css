@@ -41,6 +41,10 @@ body {
     float: right;
   }
   
+  img {
+    max-height: 50%;
+    max-width: 50%
+  }
   @media (max-height: 600px) {
     header {
       display: none;

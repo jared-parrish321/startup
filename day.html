@@ -28,10 +28,10 @@
             <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
             <menu class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" href="index.html">Home</a>
+                <a class="nav-link" href="index.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="daysOfWeek.html">Days Of Week</a>
+                <a class="nav-link active" href="day.html">Calendar</a>
               </li>
             </menu>
           </nav>
@@ -45,7 +45,16 @@
         <br>
 
         <div class="day">
-            <span class="days">Monday</span>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Choose Day Here</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+              </select>
             <button type="submit" class="btn btn-primary">Refresh</button>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
