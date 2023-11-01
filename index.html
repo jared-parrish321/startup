@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUICK CONNECT</title>
     <link rel="icon" href="favicon.ico" />
-    <script> src="login.js" </script>
+    <script src="login.js"> </script>
     <link rel="stylesheet" href="main.css" />
 
     <!-- Include bootstrap CSS framework -->
@@ -39,11 +39,10 @@
 
     <main class="container-fluid bg-secondary text-center">
       <h1>Welcome</h1>
-      <form method="get">
-        <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Your name here" />
-        <button type="submit" class="btn btn-primary" onclick="login()">Login</button>
-      </form>
+        <div>
+          <input type="text" id="name" placeholder="Your name here" />
+          <button class="btn btn-primary" onclick="login()">Login</button>
+        </div>
       <img src="assets/images/helena-lopes-e3OUQGT9bWU-unsplash.jpg" class="rounded mx-auto" alt="people hanging out">
     </main>
 
