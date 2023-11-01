@@ -1,10 +1,10 @@
 function selectDay() {
     const dayEl = document.querySelector("#Day");
-    localStorage.setItem("selectedDay", dayEl.value)
-    refresh();
+    localStorage.setItem("selectedDay", dayEl.value);
 }
 
 function refresh() {
+    selectDay();
     const selectedDay = localStorage.getItem("selectedDay");
     let calendar = [];
     const calendarText = localStorage.getItem(selectedDay + ".calendar");
@@ -41,8 +41,9 @@ function refresh() {
 }
 
 function update() {
+    selectDay();
     const rowIds = ["8AM","9AM","10AM","11AM","12AM","1PM","2PM",
-         "3PM","4PM","5PM","6PM","7PM","8PM","9PM","10PM","11PM"]
+         "3PM","4PM","5PM","6PM","7PM","8PM","9PM","10PM","11PM"];
 
     const selectedDay = localStorage.getItem("selectedDay");
     let calendarObj = {};
@@ -54,5 +55,5 @@ function update() {
                             activity: table.rows[i+1].cells[2].innerHTML
         };
     }
-    localStorage.setItem("calendar", calendarObj);
+    localStorage.setItem(selectedDay + ".calendar", JSON.stringify(calendarObj));
 }
