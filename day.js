@@ -39,3 +39,20 @@ function refresh() {
         }
     }
 }
+
+function update() {
+    const rowIds = ["8AM","9AM","10AM","11AM","12AM","1PM","2PM",
+         "3PM","4PM","5PM","6PM","7PM","8PM","9PM","10PM","11PM"]
+
+    const selectedDay = localStorage.getItem("selectedDay");
+    let calendarObj = {};
+    const table = document.getElementById('calendar');
+
+    for (const [i, id] of rowIds){
+        calendarObj[id] = { hour: table.rows[i+1].cells[0].innerHTML,
+                            host: table.rows[i+1].cells[1].innerHTML,
+                            activity: table.rows[i+1].cells[2].innerHTML
+        };
+    }
+    localStorage.setItem("calendar", calendarObj);
+}
