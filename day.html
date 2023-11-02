@@ -47,105 +47,105 @@
         <div class="day">
             <select class="form-select" id ="selectedDay" aria-label="Default select example">
                 <option selected>Choose Day Here</option>
-                <option value="1">Monday</option>
-                <option value="2">Tuesday</option>
-                <option value="3">Wednesday</option>
-                <option value="4">Thursday</option>
-                <option value="5">Friday</option>
-                <option value="6">Saturday</option>
-                <option value="7">Sunday</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
             </select>
-            <button type="submit" class="btn btn-primary">Refresh</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" onclick="refresh()">Refresh</button>
+            <button type="submit" class="btn btn-primary" onclick="update()">Submit</button>
         </div>
         <br>
 
         <table class="table table-sm table-dark table-hover table-striped" id="calendar">
-            <tr>
+            <tr id="head">
                 <th scope="col">Time</th>
-                <th scope="col">Availability</th>
+                <th scope="col">Host</th>
                 <th scope="col">Activity</th>
             </tr>
             <tbody class="table-group-divider">
                 <tr id="8AM">
                     <td>8 AM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
+                    <td contenteditable='true'></td>
                     <td contenteditable='true'></td>
                 </tr>
                 <tr id="9AM">
                     <td>9 AM</td>
-                    <td contenteditable='true class="table-danger"'>Red</td>
-                    <td contenteditable='true'></td>
+                    <td contenteditable='true'>Frank</td>
+                    <td contenteditable='true'>Park</td>
                 </tr>
                 <tr id="10AM">
                     <td>10 AM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
-                    <td contenteditable='true'></td>
+                    <td contenteditable='true'>Frank</td>
+                    <td contenteditable='true'>Park</td>
                 </tr>
                 <tr id="11AM">
                     <td>11 AM</td>
-                    <td>Green</td>
-                    <td>Study Sesh at Wilk</td>
+                    <td contenteditable='true'></td>
+                    <td contenteditable='true'></td>
                 </tr>
-                <tr id="12AM">
-                    <td>12 AM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
+                <tr id="12PM">
+                    <td>12 PM</td>
+                    <td contenteditable='true'></td>
                     <td contenteditable='true'></td>
                 </tr>
                 <tr id="1PM">
                     <td>1 PM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
-                    <td contenteditable='true'></td>
+                    <td contenteditable='true'>Jeff</td>
+                    <td contenteditable='true'>Pizza at the Wilk</td>
                 </tr>
                 <tr id="2PM">
                     <td>2 PM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
+                    <td contenteditable='true'></td>
                     <td contenteditable='true'></td>
                 </tr>
                 <tr id="3PM">
                     <td>3 PM</td>
-                    <td>Green</td>
-                    <td>Frisbee golf</td>
+                    <td contenteditable='true'>Tom</td>
+                    <td contenteditable='true'>Frisbee golf</td>
                 </tr>
                 <tr id="4PM">
                     <td>4 PM</td>
-                    <td>Green</td>
-                    <td>Frisbee golf</td>
+                    <td contenteditable='true'>Tom</td>
+                    <td contenteditable='true'>Frisbee golf</td>
                 </tr>
                 <tr id="5PM">
                     <td>5 PM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
+                    <td contenteditable='true'></td>
                     <td contenteditable='true'></td>
                 </tr>
                 <tr id="6PM">
                     <td>6 PM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
+                    <td contenteditable='true'></td>
                     <td contenteditable='true'></td>
                 </tr>
                 <tr id="7PM">
-                    <td>7 PM</td>
-                    <td>Green</td>
-                    <td>Dinner Cubbys</td>
+                    <td >7 PM</td>
+                    <td contenteditable='true'>Jimmy</td>
+                    <td contenteditable='true'>Dinner Cubbys</td>
                 </tr>
                 <tr id="8PM">
                     <td>8 PM</td>
-                    <td>Green</td>
-                    <td>Dinner Cubbys</td>
+                    <td contenteditable='true'>Jimmy</td>
+                    <td contenteditable='true'>Dinner Cubbys</td>
                 </tr>
                 <tr id="9PM">
                     <td>9 PM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
+                    <td contenteditable='true'></td>
                     <td contenteditable='true'></td>
                 </tr>
                 <tr id="10PM">
                     <td>10 PM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
+                    <td contenteditable='true'></td>
                     <td contenteditable='true'></td>
                 </tr>
                 <tr id="11PM">
                     <td>11 PM</td>
-                    <td contenteditable='true' class="table-danger">Red</td>
-                    <td contenteditable='true'></td>
+                    <td contenteditable='true'>Tim</td>
+                    <td contenteditable='true'>Tim's house</td>
                 </tr>
             </tbody>
 
@@ -157,8 +157,8 @@
           <span class="text-reset">Jared Parrish</span>
           <a lass="text-reset" href="https://github.com/jared-parrish321/startup">GitHub</a>
         </div>
-      </footer>
+    </footer>
   
-      <script src="day.js"></script>
+    <script src="day.js"></script>
   </body>
 </html>
