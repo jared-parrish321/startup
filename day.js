@@ -21,7 +21,7 @@ function refresh() {
             const hourTdEl = document.createElement('td');
             const hostTdEl = document.createElement('td');
             hostTdEl.setAttribute("contenteditable", "true");
-            const activitytdEL = document.createElement('td', {is: contenteditable='true'});
+            const activitytdEL = document.createElement('td');
             activitytdEL.setAttribute("contenteditable", "true");
 
             hourTdEl.textContent = row.hour;
