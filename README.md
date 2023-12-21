@@ -59,4 +59,8 @@ Here is a rough blueprint of how users would interact with the server
 - Application elements - Good white space and contrast
 - Application text content - Consistent fonts
 
-  
+## Javascript Deliverable
+- Login = Implemented script for logging in. Currently, the username is only cached and not displayed. I need to figure out a way to display it
+- Database - Implemented script for pushing and pulling data for table in JSON format
+- WebSocket - Implemented script for pulling data
+- Interaction - The table is editable and you can select the day to then update that table
