@@ -44,6 +44,35 @@ apiRouter.get('/calendar/:day', (req, res) => {
   }
 });
 
+apiRouter.post('/update/:day', (req, _res) => {
+  const dayOfWeek = req.params.id;
+  const calendar = req.body;
+  switch (dayOfWeek.toLowerCase()) {
+    case 'monday':
+      monday = calendar;
+      break;
+    case 'tuesday':
+      tuesday = calendar;
+      break;
+    case 'wednesday':
+      wednesday = calendar;
+      break;
+    case 'thursday':
+      thursday = calendar;
+      break;
+    case 'friday':
+      friday = calendar;
+      break;
+    case 'saturday':
+      saturday = calendar;
+      break;
+    case 'sunday':
+      sunday = calendar;
+      break;
+    default:
+      monday = calendar;
+  }
+});
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
@@ -61,4 +90,3 @@ let thursday = []
 let friday = []
 let saturday = []
 let sunday = []
-

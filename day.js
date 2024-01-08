@@ -3,15 +3,21 @@ function selectDay() {
     localStorage.setItem("selectedDay", dayEl.value);
 }
 
-function refresh() {
+async function refresh() {
     selectDay();
     const selectedDay = localStorage.getItem("selectedDay");
     let calendar = [];
-    const calendarText = localStorage.getItem("Thursday.calendar");
-    if (calendarText) {
+    try {
+        const response = await fetch(`/api/calendar/${selectedDay}`)
+        const calendarText = await response.json();
         calendar = JSON.parse(calendarText);
+        localStorage.setItem(`${selectedDay}`, JSON.stringify(calendarObj))
+    } catch {
+        const calendarText = localStorage.getItem(`${selectedDay}`);
+        if (calendarText) {
+            calendar = JSON.parse(calendarText);
+        }
     }
-
 
     if (Object.keys(calendar).length !== 0 ) {
         for (const [id, row] of Object.entries(calendar)) {
@@ -61,5 +67,5 @@ function update() {
             }
         }
     }
-    localStorage.setItem(selectedDay + ".calendar", JSON.stringify(calendarObj));
+    localStorage.setItem(selectedDay, JSON.stringify(calendarObj));
 }
