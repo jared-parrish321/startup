@@ -4,7 +4,7 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('simon');
-const scoreCollection = db.collection('score');
+const daysCollection = db.collection('days');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -15,19 +15,48 @@ const scoreCollection = db.collection('score');
   process.exit(1);
 });
 
-async function addScore(score) {
-  const result = await scoreCollection.insertOne(score);
-  return result;
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+async function insertDays() {
+  for (const day of daysOfWeek) {
+    await daysCollection.insertOne({ name: day });
+  }
 }
 
-function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
+async function updateDay(day, newData) {
+  const db = client.db('your_database_name'); // Replace with your database name
+  const daysCollection = db.collection('days');
+
+  try {
+    const existingDay = await daysCollection.findOne({ name: day });
+
+    if (!existingDay) {
+      console.log(`No document found for ${day}`);
+      return;
+    }
+
+    await daysCollection.replaceOne({ _id: existingDay._id }, newData);
+
+  } catch (error) {
+    console.error(`Error updating ${day} document:`, error);
+  }
+}
+async function getDay(day) {
+  try {
+    const dayDocument = await daysCollection.findOne({ name: day });
+
+    if (dayDocument) {
+      return dayDocument;
+    } else {
+      console.log(`No document found for ${day}`);
+      return null;
+    }
+  } catch (error) {
+    console.error(`Error fetching ${day} document:`, error);
+    return null;
+  }
 }
 
-module.exports = { addScore, getHighScores };
+// Call insertDays to insert documents
+insertDays();
+module.exports = { updateDay, getDay };

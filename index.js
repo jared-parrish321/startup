@@ -16,40 +16,18 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // GetCalendar
-apiRouter.get('/calendar/:day', (req, res) => {
+apiRouter.get('/calendar/:day', async (req, res) => {
   var dayOfWeek = req.params.day;
   dayOfWeek = dayOfWeek.toString().toLowerCase();
-  switch (dayOfWeek) {
-    case 'monday':
-      res.send(monday);
-      break;
-    case 'tuesday':
-      res.send(tuesday);
-      break;
-    case 'wednesday':
-      res.send(wednesday);
-      break;
-    case 'thursday':
-      res.send(thursday);
-      break;
-    case 'friday':
-      res.send(friday);
-      break;
-    case 'saturday':
-      res.send(saturday);
-      break;
-    case 'sunday':
-      res.send(sunday);
-      break;
-    default:
-      res.send(monday);
-  }
+  const calendar = await DB.getDay(dayOfWeek);
+  res.send(calendar);
 });
 
-apiRouter.post('/update/:day', (req, _res) => {
+apiRouter.post('/update/:day', async (req, _res) => {
   var dayOfWeek = req.params.day;
   dayOfWeek = dayOfWeek.toLowerCase();
   const calendar = req.body;
+  await DB.updateDay(dayOfWeek, calendar);
   switch (dayOfWeek) {
     case 'monday':
       monday = calendar;
