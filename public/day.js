@@ -4,6 +4,7 @@ function selectDay() {
 }
 
 async function refresh() {
+    resetTable();
     selectDay();
     const selectedDay = localStorage.getItem("selectedDay");
     let calendar = [];
@@ -24,22 +25,25 @@ async function refresh() {
             if (id === "head"){
                 continue;
             }
-            const hourTdEl = document.createElement('td');
-            const hostTdEl = document.createElement('td');
-            hostTdEl.setAttribute("contenteditable", "true");
-            const activitytdEL = document.createElement('td');
-            activitytdEL.setAttribute("contenteditable", "true");
+            const existingElement = document.getElementById(id);
+            if (existingElement) {
+                const hourTdEl = document.createElement('td');
+                const hostTdEl = document.createElement('td');
+                hostTdEl.setAttribute("contenteditable", true);
+                const activitytdEL = document.createElement('td');
+                activitytdEL.setAttribute("contenteditable", true);
 
-            hourTdEl.textContent = row.hour;
-            hostTdEl.textContent = row.host;
-            activitytdEL.textContent = row.activity;
-            
-            const rowEl = document.createElement('tr');
-            rowEl.appendChild(hourTdEl);
-            rowEl.appendChild(hostTdEl);
-            rowEl.appendChild(activitytdEL);
+                hourTdEl.textContent = row.hour;
+                hostTdEl.textContent = row.host;
+                activitytdEL.textContent = row.activity;
 
-            document.getElementById(id).replaceWith(rowEl);
+                const rowEl = document.createElement('tr');
+                rowEl.appendChild(hourTdEl);
+                rowEl.appendChild(hostTdEl);
+                rowEl.appendChild(activitytdEL);
+
+                existingElement.replaceWith(rowEl);
+            }
         }
     }
 }
@@ -53,7 +57,7 @@ async function update() {
     calendarObj.head = {hour:"Time", host:"Host", activity: "Activity"};
     const table = document.getElementById('calendar');
 
-    for (i in rowIds){
+    for (const i in rowIds){
         if (table.rows[i].cells.length === 1){
                 calendarObj[rowIds[i]] = { hour: table.rows[i].cells[0].innerHTML };
         } else{
@@ -80,3 +84,22 @@ async function update() {
     }
 }
 
+function resetTable() {
+    const table = document.getElementById('calendar');
+  
+    // Iterate through each row starting from the second row
+    for (let i = 1; i < table.rows.length; i++) {
+      const row = table.rows[i];
+  
+      // Iterate through each cell in the row starting from the second cell
+      for (let j = 1; j < row.cells.length; j++) {
+        row.cells[j].textContent = '';
+      }
+    }
+}
+function setName() {
+    const existingElement = document.getElementById("player-name");
+    existingElement.replaceWith(localStorage.getItem('userName'));
+}
+resetTable();
+setName();
