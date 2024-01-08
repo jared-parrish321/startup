@@ -98,8 +98,8 @@ function resetTable() {
     }
 }
 function setName() {
-    const existingElement = document.getElementById("player-name");
-    existingElement.replaceWith(localStorage.getItem('userName'));
+    const existingElement = document.getElementById(".player-name");
+    existingElement.replaceWith(localStorage.getItem("userName"));
 }
 resetTable();
 setName();
