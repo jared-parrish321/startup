@@ -10,7 +10,6 @@
   }
 })();
 
-
 async function loginUser() {
   loginOrCreate(`/api/auth/login`);
 }
@@ -54,7 +53,6 @@ function logout() {
 }
 
 async function getUser(email) {
-  let scores = [];
   // See if we have a user with the given email.
   const response = await fetch(`/api/user/${email}`);
   if (response.status === 200) {
