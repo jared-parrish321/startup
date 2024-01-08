@@ -57,6 +57,35 @@ async function getDay(day) {
   }
 }
 
+function getUser(email) {
+  return userCollection.findOne({ email: email });
+}
+
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
+async function createUser(email, password) {
+  // Hash the password before we insert it into the database
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  return user;
+}
+
 // Call insertDays to insert documents
 insertDays();
-module.exports = { updateDay, getDay };
+
+module.exports = { 
+  updateDay, 
+  getDay,
+  getUser,
+  getUserByToken,
+  createUser, 
+};
