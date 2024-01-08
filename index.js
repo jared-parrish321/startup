@@ -16,7 +16,7 @@ app.use(`/api`, apiRouter);
 
 // GetCalendar
 apiRouter.get('/calendar/:day', (req, res) => {
-  var dayOfWeek = req.params.id;
+  var dayOfWeek = req.params.day;
   dayOfWeek = dayOfWeek.toString().toLowerCase();
   switch (dayOfWeek) {
     case 'monday':
@@ -35,10 +35,10 @@ apiRouter.get('/calendar/:day', (req, res) => {
       res.send(friday);
       break;
     case 'saturday':
-      res.sent(saturday);
+      res.send(saturday);
       break;
     case 'sunday':
-      res.sent(sunday);
+      res.send(sunday);
       break;
     default:
       res.send(monday);
@@ -46,7 +46,7 @@ apiRouter.get('/calendar/:day', (req, res) => {
 });
 
 apiRouter.post('/update/:day', (req, _res) => {
-  var dayOfWeek = req.params.id;
+  var dayOfWeek = req.params.day;
   dayOfWeek = dayOfWeek.toLowerCase();
   const calendar = req.body;
   switch (dayOfWeek) {
