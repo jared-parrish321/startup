@@ -3,7 +3,7 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('calendars');
 const daysCollection = db.collection('days');
 
 // This will asynchronously test the connection and exit the process if it fails
@@ -15,7 +15,7 @@ const daysCollection = db.collection('days');
   process.exit(1);
 });
 
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 async function insertDays() {
   for (const day of daysOfWeek) {
