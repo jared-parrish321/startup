@@ -11,9 +11,9 @@ async function refresh() {
         const response = await fetch(`/api/calendar/${selectedDay}`)
         const calendarText = await response.json();
         calendar = JSON.parse(calendarText);
-        localStorage.setItem(`${selectedDay}`, JSON.stringify(calendarObj))
+        localStorage.setItem(selectedDay, calendarText)
     } catch {
-        const calendarText = localStorage.getItem(`${selectedDay}`);
+        const calendarText = localStorage.getItem(selectedDay);
         if (calendarText) {
             calendar = JSON.parse(calendarText);
         }
@@ -44,7 +44,7 @@ async function refresh() {
     }
 }
 
-function update() {
+async function update() {
     selectDay();
     const rowIds = ["head","8AM","9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM","6PM","7PM","8PM","9PM","10PM","11PM"];
 
@@ -67,5 +67,16 @@ function update() {
             }
         }
     }
-    localStorage.setItem(selectedDay, JSON.stringify(calendarObj));
+
+    try {
+        const response = await fetch(`/api/calendar/${selectedDay}`, {
+            method: 'POST',
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(calendarObj),
+
+        })
+    } finally {
+        localStorage.setItem(selectedDay, JSON.stringify(calendarObj));
+    }
 }
+
