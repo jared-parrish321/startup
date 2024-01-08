@@ -48,9 +48,9 @@ async function update() {
     selectDay();
     const rowIds = ["head","8AM","9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM","6PM","7PM","8PM","9PM","10PM","11PM"];
 
-    const selectedDay = localStorage.getItem("selectedDay");
+    const selectedDay = localStorage.getItem('selectedDay');
     let calendarObj = {};
-    calendarObj.head = {hour:"Time", host:"Host", activity: "activity"};
+    calendarObj.head = {hour:"Time", host:"Host", activity: "Activity"};
     const table = document.getElementById('calendar');
 
     for (i in rowIds){
@@ -69,7 +69,7 @@ async function update() {
     }
 
     try {
-        const response = await fetch(`/api/calendar/${selectedDay}`, {
+        await fetch(`/api/calendar/${selectedDay}`, {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(calendarObj),
