@@ -15,12 +15,34 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // GetCalendar
-apiRouter.get('/calendar', (req, res) => {
-    calendar = (req.body, calendar)
+apiRouter.get('/calendar/:day', (req, res) => {
+  const dayOfWeek = req.params.id;
+  switch (dayOfWeek.toLowerCase()) {
+    case 'monday':
+      res.send(monday);
+      break;
+    case 'tuesday':
+      res.send(tuesday);
+      break;
+    case 'wednesday':
+      res.send(wednesday);
+      break;
+    case 'thursday':
+      res.send(thursday);
+      break;
+    case 'friday':
+      res.send(friday);
+      break;
+    case 'saturday':
+      res.sent(saturday);
+      break;
+    case 'sunday':
+      res.sent(sunday);
+      break;
+    default:
+      res.send(monday);
+  }
 });
-
-
-// SubmitScore
 
 
 // Return the application's default page if the path is unknown
@@ -32,6 +54,11 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-// updateScores considers a new score for inclusion in the high scores.
-// The high scores are saved in memory and disappear whenever the service is restarted.
+let monday = []
+let tuesday = []
+let wednesday = []
+let thursday = []
+let friday = []
+let saturday = []
+let sunday = []
 
