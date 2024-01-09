@@ -12,7 +12,9 @@ async function refresh() {
         const response = await fetch(`/api/calendar/${selectedDay}`)
         const calendarText = await response.json();
         calendar = JSON.parse(calendarText);
-        localStorage.setItem(selectedDay, calendarText)
+        if (calendar){
+            localStorage.setItem(selectedDay, calendarText);
+        }
     } catch {
         const calendarText = localStorage.getItem(selectedDay);
         if (calendarText) {
@@ -50,35 +52,35 @@ async function refresh() {
 
 async function update() {
     selectDay();
-    const rowIds = ["head","8AM","9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM","6PM","7PM","8PM","9PM","10PM","11PM"];
+    const rowIds = ["head", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"];
 
     const selectedDay = localStorage.getItem('selectedDay');
     let calendarObj = {};
-    calendarObj.head = {hour:"Time", host:"Host", activity: "Activity"};
+
     const table = document.getElementById('calendar');
 
-    for (const i in rowIds){
-        if (table.rows[i].cells.length === 1){
-                calendarObj[rowIds[i]] = { hour: table.rows[i].cells[0].innerHTML };
-        } else{
-            if (table.rows[i].cells.length === 2){
-                calendarObj[rowIds[i]] = { hour: table.rows[i].cells[0].innerHTML, 
-                                activity: table.rows[i].cells[2].innerHTML };
-            } else {
-                calendarObj[rowIds[i]] = { hour: table.rows[i].cells[0].innerHTML, 
-                                    host: table.rows[i].cells[1].innerHTML,
-                                activity: table.rows[i].cells[2].innerHTML };
-            }
+    for (const i in rowIds) {
+        const row = table.rows[i];
+        const cellCount = row.cells.length;
+
+        // Create an object for each row, including only the necessary data
+        calendarObj[rowIds[i]] = { hour: row.cells[0].innerHTML };
+
+        if (cellCount > 2) {
+            calendarObj[rowIds[i]].activity = row.cells[2].innerHTML;
+        }
+
+        if (cellCount > 1) {
+            calendarObj[rowIds[i]].host = row.cells[1].innerHTML;
         }
     }
 
     try {
-        await fetch(`/api/calendar/${selectedDay}`, {
+        await fetch(`/api/update/${selectedDay}`, {
             method: 'POST',
-            headers: {'content-type': 'application/json'},
+            headers: { 'content-type': 'application/json' },
             body: JSON.stringify(calendarObj),
-
-        })
+        });
     } finally {
         localStorage.setItem(selectedDay, JSON.stringify(calendarObj));
     }
@@ -105,8 +107,17 @@ function setName() {
 
 async function updateLocalCalendars() {
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-  
+    for (const day of daysOfWeek) {
+        try {
+            const response = await fetch(`/api/calendar/${day}`)
+            const calendarText = await response.json();
+            let calendar = JSON.parse(calendarText);
+            localStorage.setItem(day, calendar);
+        } catch {
+            console.log(`${day} is empty`)
+        }
+    }
 }
 
-resetTable();
+updateLocalCalendars();
 setName();

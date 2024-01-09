@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
-const config = require('/home/ubuntu/startup/dbConfig.json');
+const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
@@ -23,12 +23,20 @@ async function updateDay(day, newData) {
   try {
     const existingDay = await daysCollection.findOne({ name: day });
 
-    await daysCollection.update({ 
-      _id: existingDay._id }, 
-      newData, 
-      {upsert: true}
-    );
-
+    if (existingDay){
+      await daysCollection.update( 
+        { _id: existingDay._id }, 
+        { data: newData }, 
+        { upsert: true }
+      );
+    } else {
+        try {
+          await daysCollection.insertOne({ name: day }, { data : newData });
+        } catch (insertError) {
+          console.error(`Error inserting ${day} document:`, insertError);
+        }
+      }
+    
   } catch (error) {
     console.error(`Error updating ${day} document:`, error);
   }
@@ -71,17 +79,10 @@ async function createUser(email, password) {
   return user;
 }
 
-async function clearDays(){
-  const numDeleted = await daysCollection.deleteMany({});
-  console.log(numDeleted);
-  return numDeleted;
-}
-
 module.exports = { 
   updateDay, 
   getDay,
   getUser,
   getUserByToken,
   createUser,
-  clearDays,
 };
