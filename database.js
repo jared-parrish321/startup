@@ -24,16 +24,10 @@ async function updateDay(day, newData) {
     const query = { name: day };
 
     // Specify the new data to update or create the document
-    const newDoc = { name: day, data: newData };
+    const newDoc = {name: day, data: newData};
 
     // Use updateOne with upsert option to update or insert the document
-    const result = daysCollection.updateOne(query, newDoc);
-
-    if (result.upsertedCount === 1 || result.modifiedCount === 1) {
-      console.log('Document updated or created successfully.');
-    } else {
-      console.log('Operation failed.');
-    }
+    await daysCollection.replaceOne(query, newDoc);
     
   } catch (error) {
     console.error(`Error updating ${day} document:`, error);
@@ -41,10 +35,10 @@ async function updateDay(day, newData) {
 }
 async function getDay(day) {
   try {
-    const dayDocument = daysCollection.findOne({ name: day });
+    const dayDocument = await daysCollection.findOne({ name: day });
 
     if (dayDocument) {
-      return dayDocument;
+      return dayDocument.data;
     } else {
       console.log(`No document found for ${day}`);
       return null;
