@@ -93,11 +93,12 @@ secureApiRouter.get('/calendar/:day', async (req, res) => {
   res.send(calendar);
 });
 
-secureApiRouter.post('/update/:day', async (req, _res) => {
+secureApiRouter.post('/update/:day', async (req, res) => {
   var dayOfWeek = req.params.day;
   dayOfWeek = dayOfWeek.toLowerCase();
   const calendar = req.body;
   await DB.updateDay(dayOfWeek, calendar);
+  res.send(calendar);
 });
 
 // Default error handler
