@@ -82,10 +82,10 @@ async function update() {
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(calendarObj),
         });
-    } finally {
+        localStorage.setItem(selectedDay, JSON.stringify(calendarObj));
+    } catch {
         localStorage.setItem(selectedDay, JSON.stringify(calendarObj));
     }
-    return;
 }
 
 function resetTable() {
