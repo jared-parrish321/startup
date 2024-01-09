@@ -21,21 +21,19 @@ const userCollection = db.collection('user');
 
 async function updateDay(day, newData) {
   try {
-    const existingDay = await daysCollection.findOne({ name: day });
+    const query = { name: day };
 
-    if (existingDay){
-      await daysCollection.update( 
-        { _id: existingDay._id }, 
-        { data: newData }, 
-        { upsert: true }
-      );
+    // Specify the new data to update or create the document
+    const newDoc = { name: day, data: newData };
+
+    // Use updateOne with upsert option to update or insert the document
+    const result = await daysCollection.updateOne(query, { $set: newDoc }, { upsert: true });
+
+    if (result.upsertedCount === 1 || result.modifiedCount === 1) {
+      console.log('Document updated or created successfully.');
     } else {
-        try {
-          await daysCollection.insertOne({ name: day }, { data : newData });
-        } catch (insertError) {
-          console.error(`Error inserting ${day} document:`, insertError);
-        }
-      }
+      console.log('Operation failed.');
+    }
     
   } catch (error) {
     console.error(`Error updating ${day} document:`, error);

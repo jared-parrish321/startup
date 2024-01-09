@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Serve up the front-end static content hosting
-app.use(express.static('public'));
+app.use(express.static('Other/Programming/Repos/startup/public'));
 
 // Trust headers that are forwarded from the proxy so we can determine IP addresses
 app.set('trust proxy', true);
@@ -98,31 +98,6 @@ secureApiRouter.post('/update/:day', async (req, _res) => {
   dayOfWeek = dayOfWeek.toLowerCase();
   const calendar = req.body;
   await DB.updateDay(dayOfWeek, calendar);
-  switch (dayOfWeek) {
-    case 'monday':
-      monday = calendar;
-      break;
-    case 'tuesday':
-      tuesday = calendar;
-      break;
-    case 'wednesday':
-      wednesday = calendar;
-      break;
-    case 'thursday':
-      thursday = calendar;
-      break;
-    case 'friday':
-      friday = calendar;
-      break;
-    case 'saturday':
-      saturday = calendar;
-      break;
-    case 'sunday':
-      sunday = calendar;
-      break;
-    default:
-      monday = calendar;
-  }
 });
 
 // Default error handler

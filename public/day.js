@@ -48,6 +48,7 @@ async function refresh() {
             }
         }
     }
+    return;
 }
 
 async function update() {
@@ -76,7 +77,7 @@ async function update() {
     }
 
     try {
-        await fetch(`/api/update/${selectedDay}`, {
+        let res = await fetch(`/api/update/${selectedDay}`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(calendarObj),
@@ -84,6 +85,7 @@ async function update() {
     } finally {
         localStorage.setItem(selectedDay, JSON.stringify(calendarObj));
     }
+    return;
 }
 
 function resetTable() {
