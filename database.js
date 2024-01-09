@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
-const config = require('./dbConfig.json');
+const config = require('/home/ubuntu/startup/dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
@@ -13,32 +13,21 @@ const userCollection = db.collection('user');
 (async function testConnection() {
   await client.connect();
   await db.command({ ping: 1 });
+  console.log('Succesfully connected to MongoDB Atlas');
 })().catch((ex) => {
   console.log(`Unable to connect to database with ${url} because ${ex.message}`);
   process.exit(1);
 });
 
-const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-
-async function insertDays() {
-  for (const day of daysOfWeek) {
-    await daysCollection.insertOne({ name: day });
-  }
-}
-
 async function updateDay(day, newData) {
-  const db = client.db('your_database_name'); // Replace with your database name
-  const daysCollection = db.collection('days');
-
   try {
     const existingDay = await daysCollection.findOne({ name: day });
 
-    if (!existingDay) {
-      console.log(`No document found for ${day}`);
-      return;
-    }
-
-    await daysCollection.replaceOne({ _id: existingDay._id }, newData);
+    await daysCollection.update({ 
+      _id: existingDay._id }, 
+      newData, 
+      {upsert: true}
+    );
 
   } catch (error) {
     console.error(`Error updating ${day} document:`, error);
@@ -82,13 +71,17 @@ async function createUser(email, password) {
   return user;
 }
 
-// Call insertDays to insert documents
-insertDays();
+async function clearDays(){
+  const numDeleted = await daysCollection.deleteMany({});
+  console.log(numDeleted);
+  return numDeleted;
+}
 
 module.exports = { 
   updateDay, 
   getDay,
   getUser,
   getUserByToken,
-  createUser, 
+  createUser,
+  clearDays,
 };

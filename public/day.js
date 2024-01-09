@@ -97,9 +97,15 @@ function resetTable() {
       }
     }
 }
+
 function setName() {
     const existingElement = document.querySelector(".player-name");
     existingElement.textContent = localStorage.getItem("userName");
+}
+
+async function updateLocalCalendars() {
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  
 }
 
 resetTable();
