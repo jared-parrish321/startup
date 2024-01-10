@@ -65,6 +65,16 @@ async function update() {
     }
 }
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dayDropdown = document.getElementById('selectedDay');
+
+    dayDropdown.addEventListener('change', function () {
+        refresh();
+    });
+});
+
+
 function resetTable() {
     const table = document.getElementById('calendar');
   
