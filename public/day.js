@@ -6,10 +6,7 @@ function selectDay() {
 }
 
 async function refresh() {
-    // Move the selectDay() call here
     let selectedDay = selectDay();
-    resetTable();
-
     var calendar = {};
 
     try {
@@ -30,7 +27,6 @@ async function refresh() {
             if (id === "head"){
                 continue;
             }
-            //setTimeout(function(){console.log("waiting")},3000);
             let existingElement = document.getElementById(id);
             if (existingElement) {
                 existingElement.cells[0].textContent = row.hour;
@@ -47,23 +43,15 @@ async function update() {
     const rowIds = ["head", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"];
 
     let calendarObj = {};
-
     const table = document.getElementById('calendar');
 
     for (const i in rowIds) {
         const row = table.rows[i];
-        const cellCount = row.cells.length;
-
-        // Create an object for each row, including only the necessary data
-        calendarObj[rowIds[i]] = { hour: row.cells[0].innerHTML };
-
-        if (cellCount > 2) {
-            calendarObj[rowIds[i]].activity = row.cells[2].innerHTML;
-        }
-
-        if (cellCount > 1) {
-            calendarObj[rowIds[i]].host = row.cells[1].innerHTML;
-        }
+        calendarObj[rowIds[i]] = {
+            hour: row.cells[0].innerHTML, 
+            host: row.cells[1].innerHTML, 
+            activity: row.cells[2].innerHTML
+        };
     }
 
     try {
