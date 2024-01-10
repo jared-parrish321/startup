@@ -10,11 +10,11 @@ async function refresh() {
     let selectedDay = selectDay();
     resetTable();
 
-    var calendar = [];
+    var calendar = {};
 
     try {
         const response = await fetch(`/api/calendar/${selectedDay}`);
-        const calendar = await response.json();
+        calendar = await response.json();
         if (calendar){
             localStorage.setItem(selectedDay, JSON.stringify(calendar));
         }
@@ -33,22 +33,9 @@ async function refresh() {
             //setTimeout(function(){console.log("waiting")},3000);
             let existingElement = document.getElementById(id);
             if (existingElement) {
-                const hourTdEl = document.createElement('td');
-                const hostTdEl = document.createElement('td');
-                hostTdEl.setAttribute("contenteditable", true);
-                const activitytdEL = document.createElement('td');
-                activitytdEL.setAttribute("contenteditable", true);
-
-                hourTdEl.textContent = row.hour;
-                hostTdEl.textContent = row.host;
-                activitytdEL.textContent = row.activity;
-
-                const rowEl = document.createElement('tr');
-                rowEl.appendChild(hourTdEl);
-                rowEl.appendChild(hostTdEl);
-                rowEl.appendChild(activitytdEL);
-
-                existingElement.replaceWith(rowEl);
+                existingElement.cells[0].textContent = row.hour;
+                existingElement.cells[1].textContent = row.host;
+                existingElement.cells[2].textContent = row.activity;
             }
         }
     }
