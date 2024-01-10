@@ -1,5 +1,5 @@
 function selectDay() {
-    let chosenDay = document.querySelector('#selectedDay');
+    let chosenDay = document.getElementById('selectedDay');
     let selectedDay = chosenDay.value;
     localStorage.setItem("selectedDay", selectedDay);
     return selectedDay;
@@ -28,11 +28,9 @@ async function refresh() {
                 continue;
             }
             let existingElement = document.getElementById(id);
-            if (existingElement) {
-                existingElement.cells[0].textContent = row.hour;
-                existingElement.cells[1].textContent = row.host;
-                existingElement.cells[2].textContent = row.activity;
-            }
+            existingElement.cells[0].textContent = row.hour;
+            existingElement.cells[1].textContent = row.host;
+            existingElement.cells[2].textContent = row.activity;
         }
     }
 }
@@ -65,7 +63,6 @@ async function update() {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const dayDropdown = document.getElementById('selectedDay');
 
@@ -73,21 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
         refresh();
     });
 });
-
-
-function resetTable() {
-    const table = document.getElementById('calendar');
-  
-    // Iterate through each row starting from the second row
-    for (let i = 1; i < table.rows.length; i++) {
-      const row = table.rows[i];
-  
-      // Iterate through each cell in the row starting from the second cell
-      for (let j = 1; j < row.cells.length; j++) {
-        row.cells[j].textContent = "";
-      }
-    }
-}
 
 function setName() {
     const existingElement = document.querySelector(".player-name");
