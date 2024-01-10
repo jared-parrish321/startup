@@ -14,24 +14,23 @@ async function refresh() {
 
     try {
         const response = await fetch(`/api/calendar/${selectedDay}`);
-        const calendarText = await response.json();
-        calendar = JSON.parse(calendarText);
+        const calendar = await response.json();
         if (calendar){
-            localStorage.setItem(selectedDay, calendarText);
+            localStorage.setItem(selectedDay, JSON.stringify(calendar));
         }
     } catch {
         const calendarText = localStorage.getItem(selectedDay);
         if (calendarText) {
-            calendar = JSON.parse(calendarText);
+            calendar = await JSON.parse(calendarText);
         }
     }
-
+    
     if (Object.keys(calendar).length !== 0 ) {
         for (const [id, row] of Object.entries(calendar)) {
             if (id === "head"){
                 continue;
             }
-            setTimeout(function(){console.log("waiting")},3000);
+            //setTimeout(function(){console.log("waiting")},3000);
             let existingElement = document.getElementById(id);
             if (existingElement) {
                 const hourTdEl = document.createElement('td');
