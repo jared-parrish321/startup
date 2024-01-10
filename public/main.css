@@ -29,10 +29,13 @@ body {
   }
   
   .navbar-brand {
-    padding-left: 0.3em;
-    border-bottom: solid rgb(182, 182, 182) thin;
+    padding-left: 0.9em;
   }
   
+  .player {
+    padding-right: 1.5em;
+  }
+
   menu .nav-item {
     padding: 0 0.6em;
   }
@@ -74,4 +77,13 @@ body {
   
   .author::before {
     content: " - ";
+  }
+
+  tbody tr td {
+    border-right: 1px solid #7c7171; /* Adjust the color and style as needed */
+  }
+  
+  /* Remove the right border for the last column in each row */
+  tbody tr td:last-child {
+    border-right: none;
   }
